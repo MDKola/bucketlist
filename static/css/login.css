@@ -1,0 +1,17 @@
+.container {
+	margin-top: 15%;
+}
+.input-group{
+	padding-bottom: 15px;
+
+
+}
+.input-group-addon{
+	background-color: black;
+}
+.btn {
+	background-color: black;
+}
+.text{
+	font-size: 17px;
+}
