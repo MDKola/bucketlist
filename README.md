@@ -1,19 +1,58 @@
-# bucketlist App
-The Bucketlist App is a web app where users can keep a record and share things they want to do before a certain period of time.
-## Setting Up The App
-        __Ensure you have the latest version of python installed [from https://www.python.org/](https://www.python.org/)__
-2. Clone this repository
+# Project Title
+
+One Paragraph of project description goes here
+
+## Getting Started
+
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+
+### Prerequisites
+
+Ensure you have the latest version of python installed [from https://www.python.org/](https://www.python.org/)
+
+
+### Installing
+Clone this repository
     run `<git clone https://github.com/kolaempire/bucketlist.git>`
-3. Create a Virtual Environment and activate it.
+
+
+Create a Virtual Environment and activate it.
     Follow this [guide](http://python-guide-pt-br.readthedocs.io/en/latest/dev/virtualenvs/)
-    
-4. Install dependancies
+
+Install dependancies
     Run `pip -r install requirements.txt`
 
-5. Run the app
+Run the app
     Run `python app.py`
-    
-6. Access the app by visting the IP address provided on the terminal
-    By default [http://127.0.0.1:5000/](http://127.0.0.1:5000/)
-  
+
+## Running the tests
+
+
+
+
+## Deployment
+
+
+## Built With
+
+* [Flask](http://flask.pocoo.org/) - The web framework used
+* [Virtualenv](https://virtualenv.pypa.io/en/stable/) - Dependency Management
+
+
+## Contributing
+
+
+
+## Versioning
+
+We use []() for versioning. For the versions available, see the [tags on this repository](https://github.com/kolaempire/bucketlist/tags). 
+
+## Authors
+
+* **Dennis Kola** 
+
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
