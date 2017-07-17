@@ -1,6 +1,6 @@
-# Project Title
+# The Bucketlist App
 
-One Paragraph of project description goes here
+The Bucketlist App is a web app where users can keep a record and share things they want to do before a certain period of time.
 
 ## Getting Started
 
