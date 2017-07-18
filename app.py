@@ -1,27 +1,35 @@
 from flask import Flask, redirect, render_template, request
 from wtforms import Form, StringField, TextAreaField, PasswordField, validators
 
-from classes.buckets import Buckets
-bucketlists = {}
+from classes.users import Users
 
+users = Users()
 app = Flask(__name__)
 
 @app.route('/')
 def index():
-	return render_template('home.html')
+	return render_template('index.html')
 
-@app.route('/dashboard')
-def dashboard():
-	return render_template('dashboard.html')
+@app.route('/register', methods=['POST', 'GET'])
+def register():
+	data = {'host_url': request.host_url}
+	if request.method == 'POST':
+		name = request.form['name']
+		email = request.form['email']
+		password = request.form['password']
+		error = users.register(name, email, password)
 
-@app.route('/add_bucket', methods=['POST'])
-def add_bucket():
-	bucketlist = request.form['bucketlist']
-	new_bucketlist = Buckets(bucketlist)
-	bucketlists.append(new_bucketlist)
-	return redirect('/dashboard')
+		if error is not None:
+			data['error'] = str(error)
+			return render_template('register.html', data=data)
+		else:
+			users.login(email, password)
+			return redirect('home.html')
+	
+	
+
+	
 
 
-		
 if __name__ == '__main__':
 	app.run(debug=True)
