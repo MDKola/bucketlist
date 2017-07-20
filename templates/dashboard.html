@@ -5,11 +5,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="../static/css/dashboard.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+    .footer{text-align: center;}
+  </style>
   
 </head>
+
 <body>
     <nav class="navbar navbar-inverse">
       <div class="container-fluid">
@@ -17,58 +20,58 @@
           <a class="navbar-brand" href="#">BucketList</a>
         </div>
         <ul class="nav navbar-nav">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#">Buckets</a></li>
+          <li><a href="#">Home</a></li>
+          <li><a href="#"></a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="dashboard.html"><span class="glyphicon glyphicon-user"></span> My account</a></li>
-          <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+          <li class="active"><a href="#"><span class="glyphicon glyphicon-gear"></span> Buckets</a></li>
+          <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
         </ul>
       </div>
     </nav>
 
 
     <div class="container"> 
-      <h2>Recent Buckets</h2>          
+      <h2>My Buckets</h2> 
+      <hr>
+        <form method="post">       
         <table class="table table-striped">
           <thead>
             <tr>
               <th>Bucket</th>
-              <th>Delete?</th>
+              <th></th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
+            {% for bucketlist in data['user_bucketlists']%}
+            <tr id="{{ bucketlist.id }}">
               <td>
-              <a href="manage_bucket.html">Go to Africa</a>
+                  {{ bucketlist.title }}
               </td>
               <td>
-                     <button class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button>
+                <a href="\dashboard\{{ bucketlist.id}}">view details</a>
               </td>
-            </tr>
-            <tr>
+              
               <td>
-                <a href="manage_bucket.html">Go to North pole</a>
-              </td>
-              <td>
-                 <button class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button>
+                  <button class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span></button>
+                  <a class="btn btn-default delete-btn" delete-ref="/dashboard/delete_bucket/{{ bucketlist.id }}">delete</a>
               </td>
             </tr>
-            <tr>
-              <td><a href="manage_bucket.html">Go to the sun</a></td>
-              <td>
-                  <button class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button>
-              </td>
-            </tr>
-              <td><a href="add_bucket.html"><button class="btn btn-primary">Add New</button></a></td>
-              <td>
-              </td>
-            </tr>
+            {% endfor %}
           </tbody>
         </table>
+        </form>
+        <hr>
+         <form class="form col-md-6" method="POST", action="/dashboard/add_bucket">
+          <div class="form-group form-inline">
+            <label for="email">Bucket Title</label>
+            <input type="text" class="form-control" id="title" name="bucket" value="{{ request.form.bucket }}">
+            <button class="btn btn-primary">Add Bucket</button>
+          </div>
+         </form>
 
       
-</div>
-
+  </div>
 </body>
 </html>

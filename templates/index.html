@@ -8,58 +8,28 @@
   <link rel="stylesheet" type="text/css" href="../static/css/index.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  
+  <style>
+    body{
+      background-image: url("../static/images/cover1.jpg");
+      
+      background-size: cover;
+     
+    }
+    .jumbotron{
+      background: rgba(0, 100, 200, 0.5);
+      margin-top: 220px;
+      border-radius: 4px;
+      color: black;
+
+    }
+  </style>
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-static-top">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="#">BucketList</a>
-        </div>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="register.html"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-          <li><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-        </ul>
-      </div>
-    </nav>
-
     <div class="jumbotron">
       <h2>Welcome To The BucketList</h2>
       <p>What would you like to do in the next few years? Climb a mountain? Learn to ride a bike?</p>
-      <p><a href="login.html">Login</a> or <a href="register.html">Register</a> to keep track of your bucket lists</p>
+      <p><a href="/login" class="btn btn-primary">Login</a> or <a href="/register" class="btn btn-primary">Register</a> to keep track of your bucket lists</p>
     </div>
-      <div class="container">
-        <h3>Top Buckets</h3>
-        <hr>
-      
-      <div class="row">
-        <div class="col-sm-4">
-          <div class="panel-body">
-          <h2>Bucket One</h2>
-        </div>
-      </div>
-    
-   
-        <div class="col-sm-4">
-          <div class="panel-body">
-          <h2>Bucket One</h2>
-        </div>
-      </div>
-        <div class="col-sm-4">
-          <div class="panel-body">
-          <h2>Bucket One</h2>
-        </div>
-      </div>
-      </div>
-      </div>
-      <br>
-      <hr>
-      <footer class="footer"> 
-        <div class="container">
-          <p>Copyright 2017 by BucketList Inc.</p>
-        </div>
-      </footer>
-
 
 </body>
 </html>
