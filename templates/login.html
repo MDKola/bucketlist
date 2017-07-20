@@ -8,12 +8,18 @@
   <link rel="stylesheet" type="text/css" href="../static/css/login.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+  <style>
+  body{
+     background-image: url("../static/images/cover1.jpg");
+     background-size: cover;
+   }
+  </style>
 </head>
 <body>
 <div class="col-md-3"></div>
 
 <div class="container col-md-6">
+  
   <div class="jumbotron">
     <h3 class="text-center">Login</h3>
     <form method="post" action="">
@@ -26,9 +32,14 @@
         <input id="password" value="{{request.form.password}}" required type="password" class="form-control" name="password" placeholder="Password">
       </div>
         <button type="submit" class="btn btn-primary col-md-12">Login</button>
+         
     </form>
+      <br>
+      <br>
+      <h6 class="text">New?<a href="/register"> Register</a> for a new account</h6>
+      <br>
+      <div class="text-danger">{{data['error']}} </div>
     </div>
-      <p class="text">New?<a href="/register"> Register</a> for a new account</p>
     </div>
 
 </body>
