@@ -36,7 +36,6 @@ class Users(object):
 
         if len(password) == 0:
             error_msg = 'Invalid password'
-
         elif len(email) == 0:
             error_msg = 'email field cannot be left empty'
         
