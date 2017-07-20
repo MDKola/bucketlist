@@ -17,80 +17,49 @@
           <a class="navbar-brand" href="#">BucketList</a>
         </div>
         <ul class="nav navbar-nav">
-          <li class="active"><a href="#">Home</a></li>
+          <li class="active"><a href="/dashboard">Home</a></li>
           <li><a href="#">Buckets</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="dashboard.html"><span class="glyphicon glyphicon-user"></span> My account</a></li>
+          <li><a href="/dashboard"><span class="glyphicon glyphicon-user"></span> My account</a></li>
           <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
         </ul>
       </div>
     </nav>
 
 
-    <div class="container"> 
-    <div class="col-sm-3"></div>   
-  <div class="row">
-    <div class="col-sm-6">
-      <div class="panel panel-primary">
-        <div class="panel-heading">Travel to France</div>
-        <div class="panel-body">
-          <table class="table table-condensed">
-            <thead>
-              <tr>
-                <th>Bucket Items</th>
-                <th>Done?</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Visit Eiffel Tower</td>
-                <td>
-                  <div class="checkbox">
-                    <input type="checkbox" value="">
-                  </div>
-                </td>
-                <td>
+    <div class="container">
+    <h3></h3>
+    <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Activity</th>
+              <th>Done</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr id="">
+              <td>
+              </td>
+              <td>
+              </td>
+              
+              <td>
                   <button class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span></button>
-                  <button class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button>
-                </td>
-              </tr>
-              <tr>
-                <td>Swim</td>
-                <td>
-                  <div class="checkbox">
-                    <input type="checkbox" value="">
-                  </div>
-                </td>
-                <td>
-                  <button class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span></button>
-                  <button class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button>
-                </td>
-              </tr>
-              <tr>
-                <td>Eat</td>
-                <td>
-                  <div class="checkbox">
-                    <input type="checkbox" value="">
-                  </div>
-                </td>
-                <td>
-                  <button class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span></button>
-                  <button class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="panel-footer">
-          <button class="btn btn-primary">Add Item to bucket</button>  
-          <button class="btn btn-danger pull-right">Delete Bucket</button>
-          
-        </div>
-      </div>
-    </div>
+                  <a class="btn btn-default delete-btn" delete-ref="">delete</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <hr>
+         <form class="form col-md-6" method="POST", action="/dashboard/{{data['current_bucket']}}/add_activity">
+          <div class="form-group form-inline">
+            <label for="email">Bucket Title</label>
+            <input type="text" class="form-control" id="title" name="bucket" value="{{ request.form.activity }}">
+            <button class="btn btn-primary">Add Activity</button>
+          </div>
+         </form>
 </div><br>
 
 
