@@ -1,15 +1,25 @@
 import time
+
 class Buckets(object):
 
-	def __init__(self, title, progress):
+	def __init__(self, title):
 		self.title = title
 		self.progress = None
 		self.bucket_activities = []
 		
+		epoch_time = time.time()
+		self.id = round(float(str(epoch_time)[8:]) * 10000000)
+	
+	def progress(self, progress):
+		self.progress = progress
+
 	def create_activity(self, title):
 		if len(title) < 0:
 			return "The title cannot be empty"
 		#generate a random id
+		epoch_time = time.time()
+		self.ativity_id = round(float(str(epoch_time)[8:]) * 10000000)
+
 		activity = {
 			"activity_id": id,
 			"title": title,
