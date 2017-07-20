@@ -9,19 +9,21 @@ class TestBucket(TestCase):
 
 	def test_bucket_created(self):
 		"""test if a bucket is created successfully"""
-		self.assertTrue(self.bucket.title == "first bucket")
+		self.assertTrue(self.bucket.title == "first bucket", 
+			"The bucket title shoud be set")
 
 	def test_bucket_id(self):
 		#test if each bucket is assigned an id
-		self.assertTrue(self.bucket.id != None)
+		self.assertTrue(self.bucket.id != None, "set an id to each bucket")
 	
 	def test_update_bucket(self):
 		self.assertEqual(self.bucket.update_bucket(""), 
-			"The bucket title cannot be left empty.")
+			"The new title cannot be empty.")
 
 		#check if the title is updated successfully
 		self.bucket.update_bucket("updated title")
-		self.assertTrue(self.bucket.title == "updated title")
+		self.assertTrue(self.bucket.title == "updated title",
+			"method update_bucket should update the title")
 
 	def test_bucket_activity_create_activity(self):
 		acivity_id = self.bucket.create_activity("first one")
@@ -33,9 +35,9 @@ class TestBucket(TestCase):
 	
 	def test_activity_title(self):
 		self.assertEqual(self.bucket.create_activity(""), 
-			"Activity title cannot be left empty.")
+			"The title cannot be empty")
 
-	def bucket_update_activity(self):
+	def test_bucket_update_activity(self):
 		self.assertEqual(
 			self.bucket.update_activity("no_id", "new_activity_name"),
 				"The item does not exist")
