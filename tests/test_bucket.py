@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from classes.buckets import Buckets
+from buckets import Buckets
 
 class TestBucket(TestCase):
 
