@@ -30,11 +30,11 @@ class TestBucket(TestCase):
 		self.assertTrue(self.bucket.bucket_activities == [{
 			'id': acivity_id,
 			'title': "first one",
-			"completed": False
+			"done": False
 		}], "an item should be created")
 	
 	def test_activity_title(self):
-		self.assertEqual(self.bucket.create_activity(""), 
+		self.assertTrue(self.bucket.create_activity(""), 
 			"The title cannot be empty")
 
 	def test_bucket_update_activity(self):
@@ -48,7 +48,7 @@ class TestBucket(TestCase):
 			[{
 				'id': activity_id,
 				'title': 'newer ones',
-				'copleted': False
+				'done': False
 			}], "The bucket_activities should be updated to 'newer ones'.")
 
 	def test_delete_activity(self):
