@@ -54,8 +54,9 @@ def register():
 		name = request.form['name']
 		email = request.form['email']
 		password = request.form['password']
+		confirm = request.form['confirm']
 
-		error = users.register(name, email, password)
+		error = users.register(name, email, password, confirm)
 
 		if error is not None:
 			data['error'] = str(error)
@@ -96,6 +97,22 @@ def add_bucket():
 		bucketlists[current_user].append(new_bucket)
 	else:
 		bucketlists[current_user] = [new_bucket]
+	return redirect('/dashboard')
+
+@app.route('/dashboard/delete_bucket/<bucket_id>', methods=['GET', 'POST'])
+def delete_bucket(bucket_id):
+	logged_in_user = users.user_is_logged_in
+
+	if logged_in_user in bucketlists.keys():
+		user_buckets = bucketlists[logged_in_user]
+
+	count = 0
+	for bucket in user_buckets:
+		if str(bucket.id) == bucket_id:
+			user_buckets.pop(count)
+			break
+
+		count += 1
 	return redirect('/dashboard')
 	
 
