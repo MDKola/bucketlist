@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/kolaempire/bucketlist.svg?branch=master)](https://travis-ci.org/kolaempire/bucketlist)
+[![Coverage Status](https://coveralls.io/repos/github/kolaempire/bucketlist/badge.svg?branch=master)](https://coveralls.io/github/kolaempire/bucketlist?branch=master)
 # The Bucketlist App
 
 The Bucketlist App is a web app where users can keep a record and share things they want to do before a certain period of time.
