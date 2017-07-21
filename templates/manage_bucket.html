@@ -22,7 +22,7 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li><a href="/dashboard"><span class="glyphicon glyphicon-user"></span> My account</a></li>
-          <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+          <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
         </ul>
       </div>
     </nav>
@@ -30,34 +30,37 @@
 
     <div class="container">
     <h3></h3>
-    <table class="table table-striped">
+    <form method="post">       
+        <table class="table table-striped">
           <thead>
             <tr>
-              <th>Activity</th>
-              <th>Done</th>
+              <th>Bucket</th>
+              <th>Done?</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
             <tr id="">
               <td>
+                
               </td>
               <td>
+                <a href=""></a>
               </td>
               
               <td>
-                  <button class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span></button>
-                  <a class="btn btn-default delete-btn" delete-ref="">delete</a>
+            
               </td>
             </tr>
           </tbody>
         </table>
+        </form>
         <hr>
-         <form class="form col-md-6" method="POST", action="/dashboard/{{data['current_bucket']}}/add_activity">
+         <form class="form col-md-6" method="get", action="">
           <div class="form-group form-inline">
             <label for="email">Bucket Title</label>
-            <input type="text" class="form-control" id="title" name="bucket" value="{{ request.form.activity }}">
-            <button class="btn btn-primary">Add Activity</button>
+            <input type="text" class="form-control" id="title" name="bucket" value="">
+            <button class="btn btn-primary">Add Bucket</button>
           </div>
          </form>
 </div><br>
