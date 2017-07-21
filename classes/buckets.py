@@ -18,15 +18,15 @@ class Buckets(object):
 			return "The title cannot be empty"
 		#generate a random id
 		epoch_time = time.time()
-		self.ativity_id = round(float(str(epoch_time)[8:]) * 10000000)
+		activity_id = round(float(str(epoch_time)[8:]) * 10000000)
 
 		activity = {
-			"activity_id": id,
+			"id": activity_id,
 			"title": title,
 			"done": False
 		}
 		self.bucket_activities.append(activity)
-		return id
+		return activity_id
 
 
 	def update_bucket(self, new_title):
@@ -37,12 +37,12 @@ class Buckets(object):
 		self.title = new_title
 
 
-	def update_activity(self, new_activity_name, id):
+	def update_activity(self, id, new_activity_name):
 		activity_exist = False
 		count = 0
 
 		for activity in self.bucket_activities:
-			if str(id) == str(activity['activity_id']):
+			if str(id) == str(activity['id']):
 				activity_exists = True
 				activity['title'] = new_activity_name
 				self.bucket_activities.pop(count)
@@ -56,7 +56,7 @@ class Buckets(object):
 		count = 0
 
 		for activity in self.bucket_activities:
-			if str(id) == str(activity["activity_id"]):
+			if str(id) == str(activity["id"]):
 				activity_exist = True
 				self.bucket_activities.pop(count)
 
