@@ -10,8 +10,9 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
    <style>
   body{
-     background-image: url("../static/images/cover1.jpg");
-     background-size: cover;
+      background-image: url("../static/images/cover1.jpg");
+      background-image: 100%;
+      background-size: 100% 130%;
    }
   </style>
 
@@ -37,14 +38,14 @@
     </div>
     <div class="input-group">
       <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-      <input id="password" type="password" class="form-control" name="password" placeholder="Confirm Password" required>
+      <input id="confirm" type="password" class="form-control"  value="{{request.form.confirm}}" name="confirm" placeholder="Confirm Password" required>
     </div>
       <button type="submit" class="btn btn-primary col-md-12">Submit</button>
       <br>
       <hr>
       <div class="text-danger">{{data['error']}} </div>
   </form>
-      <h6 class="text">New?<a href="/login"> Login</a> for a new account</h6>
+      <h6 class="text">Already a member?<a href="/login"> Login</a></h6>
   </div>
 </div>
 
