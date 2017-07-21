@@ -11,23 +11,23 @@ class Test_user(unittest.TestCase):
         self.users = Users()
 
     def test_name(self):
-        self.assertEqual(self.users.register(1332, "email@mail.com", "password"), 
+        self.assertEqual(self.users.register(1332, "email@mail.com", "password", "password"), 
             "Name cannot contain numbers")
     
     def test_password(self):
-        self.assertEqual(self.users.register('name', "email@mail.com", " "), 
+        self.assertEqual(self.users.register('name', "email@mail.com", " ", " "), 
             "Password length should be at least 6 characters")
-        self.assertEqual(self.users.register('name', "email@mail.com", "1234"), 
+        self.assertEqual(self.users.register('name', "email@mail.com", "1234", "confirm"), 
             'Password length should be at least 6 characters')
 
     def test_registration_successfull(self):
-        self.users.register("Dennis", "example@test.com", "password")
+        self.users.register("Dennis", "example@test.com", "password", "password")
         user_account = {"example@test.com":{'name': "Dennis", "password":"password"}}
         self.assertEqual(self.users.users, user_account)
 
     def test_duplicate_name(self):
-        self.users.register("myname", "email@mail.com", "password")
-        self.assertEqual(self.users.register("myname", "email@mail.com", "password"), 
+        self.users.register("myname", "email@mail.com", "password", "password")
+        self.assertEqual(self.users.register("myname", "email@mail.com", "password", "password"), 
             'Email already exists.')
 
     def test_login(self):
@@ -38,11 +38,11 @@ class Test_user(unittest.TestCase):
 
     def test_check_user_exists(self):
         self.assertEqual(self.users.login("unknown_email", "password"), 
-            "User does not exist.")
+            "Invalid email address.")
     
     def test_wrong_password(self):
         #create an account
-        self.users.register("name", "email@gmail.com", "password")
+        self.users.register("name", "email@gmail.com", "password", "password")
 
         #login with the correct email and wrong password
         self.assertEqual(self.users.login("email@gmail.com", "passward"), 
