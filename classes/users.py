@@ -1,14 +1,28 @@
+import re
+
 class Users(object):
 
     def __init__(self):
         self.users = {}
         self.user_is_logged_in = None
     
-    def register(self, name, email, password):
+    def register(self, name, email, password, confirm):
         error_msg = None
 
         if type(name) != str:
             error_msg = "Name cannot contain numbers"
+        
+        if len(email) < 7: 
+            error_msg = "Invalid email address."
+
+        if '@' not in email:
+            error_msg = "Invalid email address."
+
+        if (email[-4:] != '.com'):
+            error_msg = "Invalid email address."
+
+        if password != confirm:
+            error_msg = "Your passwords do not match!"
 
         if len(password) < 6:
             error_msg = 'Password length should be at least 6 characters'
@@ -33,6 +47,15 @@ class Users(object):
     
     def login(self, email, password):
         error_msg = None
+
+        if len(email) < 7: 
+            error_msg = "Invalid email address."
+
+        if '@' not in email:
+            error_msg = "Invalid email address."
+
+        if (email[-4:] != '.com'):
+            error_msg = "Invalid email address."
 
         if len(password) == 0:
             error_msg = 'Invalid password'
