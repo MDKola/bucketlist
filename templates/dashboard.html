@@ -4,25 +4,53 @@
   <title>The Bucketlist</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <base href="{{ data['host_url'] }}">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <style>
-    .footer{text-align: center;}
+  <<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <style>
+  body{
+      background-image: url("../static/images/cover.jpg");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-size:100 auto;
+   }
+   .navbar{
+    
+     border-radius: 0px;
+     border: none;
+     border-bottom: 1px solid black;
+     color: black;
+     margin-top: 10px;
+   }
+   .container{
+    background-image: url("../static/images/cover10.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-top: 80px;
+    border-radius: 10px;
+   }
+   .title{
+    margin-top: 100px;
+   }
+   .other_nav{
+    margin-right: 82%;
+    background:rgba(0,0,0,0);
+    border-bottom: none;
+   }
+   .details a, .details{
+    color: black;
+   }
   </style>
+
   
 </head>
 
 <body>
-    <nav class="navbar navbar-inverse">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
           <a class="navbar-brand" href="#">BucketList</a>
         </div>
-        <ul class="nav navbar-nav">
-          <li><a href="#">Home</a></li>
-          <li><a href="#"></a></li>
-        </ul>
         <ul class="nav navbar-nav navbar-right">
           <li class="active"><a href="#"><span class="glyphicon glyphicon-gear"></span> Buckets</a></li>
           <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
@@ -30,32 +58,34 @@
       </div>
     </nav>
 
-
-    <div class="container"> 
-      <h2>My Buckets</h2> 
+    <div class="col-md-2">
+    </div>
+    <div class="container col-md-8">  
       <hr>
-        <form method="post">       
-        <table class="table table-striped">
+        <form method="post" action="/edit/bucket">       
+        <table class="table" id="bucketListTable">
           <thead>
             <tr>
-              <th>Bucket</th>
+              <th class="details">Bucket Name</th>
               <th></th>
-              <th>Action</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
             {% for bucketlist in data['user_bucketlists']%}
             <tr id="{{ bucketlist.id }}">
-              <td>
+              <td class="details">
                   {{ bucketlist.title }}
               </td>
               <td>
-                <a href="\dashboard\{{ bucketlist.id}}">view details</a>
+                <a href="\dashboard\{{ bucketlist.id}}">Explore Bucket</a>
+              </td>
+              <td>
               </td>
               
               <td>
-                   <a href="#" class="btn btn-default">Edit</a>
-                  <a href="\dashboard\delete_bucket\{{ bucketlist.id}}" class="btn btn-danger">delete</a>
+                 <a href="\dashboard\{{ bucketlist.id}}">Edit</a>
+                  <a href="\dashboard\delete_bucket\{{ bucketlist.id}}" class="btn btn-default"><span class="glyphicon glyphicon-trash"></span></a>
               </td>
             </tr>
             {% endfor %}
@@ -63,15 +93,16 @@
         </table>
         </form>
         <hr>
-         <form class="form col-md-6" method="POST", action="/dashboard/add_bucket">
-          <div class="form-group form-inline">
-            <label for="email">Bucket Title</label>
-            <input type="text" class="form-control" id="title" name="bucket" value="{{ request.form.bucket }}">
-            <button class="btn btn-primary">Add Bucket</button>
+         <form name="addBucket" class="" method="POST", action="/dashboard/add_bucket">
+          <div class="form-group">
+            <input type="text" class="form-control" required placeholder="Enter Bucket Name" id="title" name="bucket" value="{{ request.form.bucket }}">
+            <br>
+            <input type="submit" class="btn btn-primary" value="Add Bucket">
           </div>
          </form>
 
       
   </div>
+  </script>
 </body>
 </html>
