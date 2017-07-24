@@ -13,7 +13,10 @@ users = Users()
 
 @app.route('/')
 def index():
-	return render_template('index.html')
+	if users.user_is_logged_in is not None:
+		return redirect('/dashboard')
+	else:	
+		return render_template('index.html')
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
@@ -84,9 +87,7 @@ def display_bucket():
 	if logged_in_user in bucketlists.keys():
 		user_bucketlists = bucketlists[logged_in_user]
 		data['user_bucketlists'] = user_bucketlists
-	
 	return render_template('dashboard.html', data=data)
-
 @app.route('/dashboard/add_bucket', methods=['POST'])
 def add_bucket():
 	bucket = request.form['bucket']
@@ -98,6 +99,16 @@ def add_bucket():
 	else:
 		bucketlists[current_user] = [new_bucket]
 	return redirect('/dashboard')
+
+@app.route('/edit_bucket/<bucket_id>', methods=['POST', 'GET'])
+def edit_bucket(bucket_id):
+	if request.method == 'POST':
+		title = request.form['title']
+		return redirect(url_for('dashboard'))
+	return render_template('edit_bucket.html')
+
+	
+
 
 @app.route('/dashboard/delete_bucket/<bucket_id>', methods=['GET', 'POST'])
 def delete_bucket(bucket_id):
@@ -135,17 +146,31 @@ def view_bucket_activity(bucket_id):
 
 @app.route('/manage/<bucket_id>/add_activity', methods=['POST'])
 def create_bucket_activity(bucket_id):
-	activity_title = request.form['activity']
+	title = request.form['activity']
 	logged_in_user = users.user_is_logged_in
 
-	if user_is_logged_in in bucketlists.keys:
+	if logged_in_user in bucketlists.keys():
 		user_buckets = bucketlists[logged_in_user]
 
 	for bucket in user_buckets:
 		if str(bucket.id) == bucket_id:
 			bucket.create_activity(title)
-	return redirect('/dashboard')
+	return redirect('/dashboard/' + bucket_id)
 
+@app.route('/manage/<bucket_id>/delete/<activity_id>', methods=['GET', 'POST'])
+def delete_activity(bucket_id, activity_id):
+	logged_in_user = users.user_is_logged_in
+
+	if logged_in_user in bucketlists.keys():
+		user_buckets = bucketlists[logged_in_user]
+
+	for bucket in user_buckets:
+		if str(bucket.id) == bucket_id:
+			for item in bucket.bucket_activities:
+				if str(item['id']) == str(activity_id):
+					bucket.delete_activity(activity_id)
+					break
+	return redirect('/dashboard/' + bucket_id)
 
 
 if __name__ == '__main__':

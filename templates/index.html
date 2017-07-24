@@ -10,30 +10,28 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <style>
     body{
-      background-image: url("../static/images/cover1.jpg");
-      background-image: 100%;
-      background-size: 100% 130%;
+      background-image: url("../static/images/cover.jpg");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-size:100 auto;
 
      
     }
     .jumbotron{
-      background: rgba(0, 100, 200, 0.8);
+      background: rgba(0, 0, 0, 0.1);
       margin-top: 200px;
       border-radius: 4px;
-      color: white;
       margin-right:15%;
+      color: black;
 
-    }
-    .btn {
-     border:0.1px solid white;
     }
   </style>
 </head>
 <body>
     <div class="jumbotron">
-      <h2>Welcome To The BucketList</h2>
+      <h1>The BucketList</h1>
       <p>What would you like to do in the next few years? Climb a mountain? Learn to ride a bike?</p>
-      <p><a href="/login" class="btn btn-primary">Login</a> - <a href="/register" class="btn btn-primary">Register</a> to keep track of your bucket lists</p>
+      <p><a href="/login" class="btn btn-success col-md-2">Login</a>   - <a href="/register" class="btn btn-primary">Register</a></p>
     </div>
 
 </body>
