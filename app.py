@@ -100,12 +100,26 @@ def add_bucket():
 		bucketlists[current_user] = [new_bucket]
 	return redirect('/dashboard')
 
-@app.route('/edit_bucket/<bucket_id>', methods=['POST', 'GET'])
+@app.route('/edit/<bucket_id>', methods=['POST', 'GET'])
 def edit_bucket(bucket_id):
+	if request.method == 'GET':
+		return render_template('edit_bucket.html', bucket_id=bucket_id)
+
 	if request.method == 'POST':
-		title = request.form['title']
-		return redirect(url_for('dashboard'))
-	return render_template('edit_bucket.html')
+		id = request.form['id']
+		new_title = request.form['new_title']
+
+		
+		logged_in_user = users.user_is_logged_in
+		user_buckets = bucketlists[logged_in_user]
+
+		for bucket in user_buckets:
+			if str(bucket.id) == id:
+				bucket.update_bucket(new_title)
+				break
+		return redirect(url_for('display_bucket'))
+	
+
 
 	
 
@@ -156,6 +170,33 @@ def create_bucket_activity(bucket_id):
 		if str(bucket.id) == bucket_id:
 			bucket.create_activity(title)
 	return redirect('/dashboard/' + bucket_id)
+
+@app.route('/edit_activity/<activity_id>', methods=['POST', 'GET'])
+def edit_activity(activity_id):
+	if request.method == 'GET':
+		return render_template('edit_activity.html', activity_id=activity_id)
+
+	if request.method == 'POST':
+		print('I see you')
+		id = request.form['id']
+		new_title = request.form['new_title']
+		print(new_title)
+		print(id)
+
+		
+		logged_in_user = users.user_is_logged_in
+		user_buckets = bucketlists[logged_in_user]
+		print('user_bucket', user_buckets)
+
+		for bucket in user_buckets:
+			if str(bucket.id) == activity_id:
+				if item in bucket.bucket_activities:
+					if str(item['id']) == str(activity_id):
+						bucket.update_activity(new_title)
+						break
+		
+		return redirect('/dashboard')
+		
 
 @app.route('/manage/<bucket_id>/delete/<activity_id>', methods=['GET', 'POST'])
 def delete_activity(bucket_id, activity_id):
