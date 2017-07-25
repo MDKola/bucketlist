@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>The Bucketlist</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <style>
+  body{
+      background-image: url("../static/images/cover.jpg");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-size:100 auto;
+   }
+   .navbar{
+    
+     border-radius: 0px;
+     border: none;
+     border-bottom: 1px solid black;
+     color: black;
+     margin-top: 10px;
+   }
+   .container{
+    background-image: url("../static/images/cover10.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-top: 80px;
+    border-radius: 10px;
+   }
+   .title{
+    margin-top: 100px;
+   }
+   .other_nav{
+    margin-right: 82%;
+    background:rgba(0,0,0,0);
+    border-bottom: none;
+   }
+   .details a, .details{
+    color: black;
+   }
+  </style>
+
+  
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">BucketList</a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="active"><a href="#"><span class="glyphicon glyphicon-gear"></span> Buckets</a></li>
+          <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="col-md-2">
+    </div>
+    <div class="container col-md-8">  
+        <hr>
+         <form name="addBucket" class="" method="POST", action="/edit/bucket_id">
+          <div class="form-group">
+            <input type="hidden" name="id" value="{{ bucket_id}}">
+            <input type="text" class="form-control" required placeholder="Enter the new title here" id="title" name="new_title" value="{{ request.form.new_title }}">
+            <br>
+            <input type="submit" class="btn btn-primary" value="Save Changes">
+          </div>
+         </form>
+
+      
+  </div>
+</body>
+</html>
