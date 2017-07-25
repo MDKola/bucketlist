@@ -62,7 +62,7 @@
     </div>
     <div class="container col-md-8">  
       <hr>
-        <form method="post" action="/edit/bucket">       
+        <form method="post">       
         <table class="table" id="bucketListTable">
           <thead>
             <tr>
@@ -84,7 +84,7 @@
               </td>
               
               <td>
-                 <a href="\dashboard\{{ bucketlist.id}}">Edit</a>
+                 <a href="\edit\{{ bucketlist.id}}">Edit</a>
                   <a href="\dashboard\delete_bucket\{{ bucketlist.id}}" class="btn btn-default"><span class="glyphicon glyphicon-trash"></span></a>
               </td>
             </tr>
