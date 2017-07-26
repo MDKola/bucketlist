@@ -3,6 +3,7 @@ from flask import redirect
 from flask import render_template
 from flask import request
 from flask import url_for
+from flask import flash
 
 from classes.users import Users
 from classes.buckets import Buckets
@@ -120,10 +121,6 @@ def edit_bucket(bucket_id):
 		return redirect(url_for('display_bucket'))
 	
 
-
-	
-
-
 @app.route('/dashboard/delete_bucket/<bucket_id>', methods=['GET', 'POST'])
 def delete_bucket(bucket_id):
 	logged_in_user = users.user_is_logged_in
@@ -169,6 +166,7 @@ def create_bucket_activity(bucket_id):
 	for bucket in user_buckets:
 		if str(bucket.id) == bucket_id:
 			bucket.create_activity(title)
+			flash('Bucket Added successfully')
 	return redirect('/dashboard/' + bucket_id)
 
 @app.route('/edit_activity/<activity_id>', methods=['POST', 'GET'])
@@ -185,15 +183,19 @@ def edit_activity(activity_id):
 
 		
 		logged_in_user = users.user_is_logged_in
-		user_buckets = bucketlists[logged_in_user]
-		print('user_bucket', user_buckets)
 
-		for bucket in user_buckets:
-			if str(bucket.id) == activity_id:
-				if item in bucket.bucket_activities:
-					if str(item['id']) == str(activity_id):
-						bucket.update_activity(new_title)
-						break
+		if logged_in_user in bucketlists.keys():
+			user_bucket = bucketlists[logged_in_user]
+
+		for bucket in user_bucket:
+			print('one')
+			for item in bucket.bucket_activities:
+				print('two')
+				if str(item['id']) == activity_id:
+					print('three')
+					bucket.update_activity(id, new_title)
+					break
+
 		
 		return redirect('/dashboard')
 		
