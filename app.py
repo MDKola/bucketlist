@@ -121,6 +121,10 @@ def edit_bucket(bucket_id):
 		return redirect(url_for('display_bucket'))
 	
 
+
+	
+
+
 @app.route('/dashboard/delete_bucket/<bucket_id>', methods=['GET', 'POST'])
 def delete_bucket(bucket_id):
 	logged_in_user = users.user_is_logged_in
@@ -188,11 +192,8 @@ def edit_activity(activity_id):
 			user_bucket = bucketlists[logged_in_user]
 
 		for bucket in user_bucket:
-			print('one')
 			for item in bucket.bucket_activities:
-				print('two')
 				if str(item['id']) == activity_id:
-					print('three')
 					bucket.update_activity(id, new_title)
 					break
 
@@ -215,6 +216,6 @@ def delete_activity(bucket_id, activity_id):
 					break
 	return redirect('/dashboard/' + bucket_id)
 
-
+app.secret_key = "thisiisasecret"
 if __name__ == '__main__':
 	app.run(debug=True)
