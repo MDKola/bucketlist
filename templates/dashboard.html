@@ -4,9 +4,10 @@
   <title>The Bucketlist</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-   <base href="{{ data['host_url'] }}">
+  <base href="{{ data['host_url'] }}">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="../static/css/dashboard.css">
+
       <style>
   body{
       background-image: url("../static/images/cover.jpg");
@@ -57,10 +58,22 @@
         </ul>
       </div>
     </nav>
-
+    <div>
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <ul class=flashes>
+              {% for message in messages %}
+                <li>{{ message }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+    </div>
     <div class="col-md-2">
     </div>
     <div class="container col-md-8">  
+      <hr>
+      <h3 class="text-center" >Your Current Buckets</h3>
       <hr>
         <form method="post">       
         <table class="table" id="bucketListTable">
@@ -78,13 +91,13 @@
                   {{ bucketlist.title }}
               </td>
               <td>
-                <a href="\dashboard\{{ bucketlist.id}}">Explore Bucket</a>
+                <a href="\dashboard\{{ bucketlist.id}}" class="btn btn-default">View or Add Items</a>
               </td>
               <td>
               </td>
               
               <td>
-                 <a href="\edit\{{ bucketlist.id}}">Edit</a>
+                 <a href="\edit\{{ bucketlist.id}}" class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span></a>
                   <a href="\dashboard\delete_bucket\{{ bucketlist.id}}" class="btn btn-default"><span class="glyphicon glyphicon-trash"></span></a>
               </td>
             </tr>
@@ -93,10 +106,10 @@
         </table>
         </form>
         <hr>
-         <form name="addBucket" class="" method="POST", action="/dashboard/add_bucket">
-          <div class="form-group">
+          <h4>Add a new bucketlist</h4>
+         <form method="POST" action="/dashboard/add_bucket">
+          <div class="form-group form-inline">
             <input type="text" class="form-control" required placeholder="Enter Bucket Name" id="title" name="bucket" value="{{ request.form.bucket }}">
-            <br>
             <input type="submit" class="btn btn-primary" value="Add Bucket">
           </div>
          </form>
