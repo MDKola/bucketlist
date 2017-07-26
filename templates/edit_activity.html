@@ -4,7 +4,6 @@
   <title>The Bucketlist</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-   <base href="{{ data['host_url'] }}">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
       <style>
@@ -61,41 +60,11 @@
     <div class="col-md-2">
     </div>
     <div class="container col-md-8">  
-      <hr>
-        <form method="post">       
-        <table class="table" id="bucketListTable">
-          <thead>
-            <tr>
-              <th class="details">Bucket Name</th>
-              <th></th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for bucketlist in data['user_bucketlists']%}
-            <tr id="{{ bucketlist.id }}">
-              <td class="details">
-                  {{ bucketlist.title }}
-              </td>
-              <td>
-                <a href="\dashboard\{{ bucketlist.id}}">Explore Bucket</a>
-              </td>
-              <td>
-              </td>
-              
-              <td>
-                 <a href="\edit\{{ bucketlist.id}}">Edit</a>
-                  <a href="\dashboard\delete_bucket\{{ bucketlist.id}}" class="btn btn-default"><span class="glyphicon glyphicon-trash"></span></a>
-              </td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-        </form>
         <hr>
-         <form name="addBucket" class="" method="POST", action="/dashboard/add_bucket">
+         <form name="addBucket" class="" method="POST", action="/edit_activity/activity_id">
           <div class="form-group">
-            <input type="text" class="form-control" required placeholder="Enter Bucket Name" id="title" name="bucket" value="{{ request.form.bucket }}">
+            <input type="hidden" name="id" value="{{ activity_id}}">
+            <input type="text" class="form-control" required placeholder="Enter activity Name" id="title" name="new_title" value="{{ request.form.new_title }}">
             <br>
             <input type="submit" class="btn btn-primary" value="Add Bucket">
           </div>
@@ -103,6 +72,5 @@
 
       
   </div>
-  </script>
 </body>
 </html>

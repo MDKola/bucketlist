@@ -3,6 +3,7 @@ from flask import redirect
 from flask import render_template
 from flask import request
 from flask import url_for
+from flask import flash
 
 from classes.users import Users
 from classes.buckets import Buckets
@@ -100,15 +101,25 @@ def add_bucket():
 		bucketlists[current_user] = [new_bucket]
 	return redirect('/dashboard')
 
-@app.route('/edit_bucket/<bucket_id>', methods=['POST', 'GET'])
+@app.route('/edit/<bucket_id>', methods=['POST', 'GET'])
 def edit_bucket(bucket_id):
+	if request.method == 'GET':
+		return render_template('edit_bucket.html', bucket_id=bucket_id)
+
 	if request.method == 'POST':
-		title = request.form['title']
-		return redirect(url_for('dashboard'))
-	return render_template('edit_bucket.html')
+		id = request.form['id']
+		new_title = request.form['new_title']
 
+		
+		logged_in_user = users.user_is_logged_in
+		user_buckets = bucketlists[logged_in_user]
+
+		for bucket in user_buckets:
+			if str(bucket.id) == id:
+				bucket.update_bucket(new_title)
+				break
+		return redirect(url_for('display_bucket'))
 	
-
 
 @app.route('/dashboard/delete_bucket/<bucket_id>', methods=['GET', 'POST'])
 def delete_bucket(bucket_id):
@@ -155,7 +166,39 @@ def create_bucket_activity(bucket_id):
 	for bucket in user_buckets:
 		if str(bucket.id) == bucket_id:
 			bucket.create_activity(title)
+			flash('Bucket Added successfully')
 	return redirect('/dashboard/' + bucket_id)
+
+@app.route('/edit_activity/<activity_id>', methods=['POST', 'GET'])
+def edit_activity(activity_id):
+	if request.method == 'GET':
+		return render_template('edit_activity.html', activity_id=activity_id)
+
+	if request.method == 'POST':
+		print('I see you')
+		id = request.form['id']
+		new_title = request.form['new_title']
+		print(new_title)
+		print(id)
+
+		
+		logged_in_user = users.user_is_logged_in
+
+		if logged_in_user in bucketlists.keys():
+			user_bucket = bucketlists[logged_in_user]
+
+		for bucket in user_bucket:
+			print('one')
+			for item in bucket.bucket_activities:
+				print('two')
+				if str(item['id']) == activity_id:
+					print('three')
+					bucket.update_activity(id, new_title)
+					break
+
+		
+		return redirect('/dashboard')
+		
 
 @app.route('/manage/<bucket_id>/delete/<activity_id>', methods=['GET', 'POST'])
 def delete_activity(bucket_id, activity_id):
