@@ -42,6 +42,9 @@
    .details a, .details{
     color: black;
    }
+   table th{
+     width: auto;
+   }
 
   </style>
   </style>
@@ -67,30 +70,35 @@
     </div>
         <div class="container col-md-8">
         <hr>
+      <h3 class="text-center">Current Activities</h3>
+      <hr>
         <form method="post">       
         <table class="table" id="bucketListTable">
           <thead>
             <tr>
               <th class="details">Activity</th>
-              <th class="details">Done</th>
+              <th class="details"></th>
               <th></th>
             </tr>
           </thead>
           <tbody>
             {% for activity in data['user_activities'] %}
+            {% if activity.title %}
             <tr id="{{ activity.id }}">
               <td class="details">
                   {{ activity.title }}
               </td>
               <td>
-                <input type="checkbox" {{'checked' if activity.done }}/>
               </td>
               
               <td>
-                  <a href="\edit_activity\{{ activity.id }}">Edit</a>
+                  <a href="\edit_activity\{{ activity.id }}" class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span></a>
                   <a href="\manage\{{ data['current_bucket']}}\delete\{{activity.id}}" class="btn btn-default"><span class="glyphicon glyphicon-trash"></span></a>
               </td>
             </tr>
+            {% else %}
+            <p>Nothing to display here</p>
+            {% endif %}
             {% endfor %}
           </tbody>
         </table>
