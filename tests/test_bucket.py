@@ -38,10 +38,6 @@ class TestBucket(TestCase):
 			"The title cannot be empty")
 
 	def test_bucket_update_activity(self):
-		self.assertEqual(
-			self.bucket.update_activity("no_id", "new_activity_name"),
-				"The item does not exist")
-		
 		activity_id = self.bucket.create_activity("new activity")
 		self.bucket.update_activity(activity_id, "newer ones")
 		self.assertTrue(self.bucket.bucket_activities == 
