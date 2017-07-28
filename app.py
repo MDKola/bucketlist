@@ -17,10 +17,8 @@ users = Users()
 def index():
     """Display the welcome page"""
     if users.user_is_logged_in is not None:
-        flash('Welcome back.')
         return redirect('/dashboard')
     else:
-        flash('Please login or Register to continue.')
         return render_template('index.html')
 
 
@@ -57,13 +55,11 @@ def login():
 def register():
     """Register a new user and login the user"""
     if users.user_is_logged_in is not None:
-        flash('welcome back!')
         return redirect('/dashboard')
 
     data = {}
 
     if request.method == 'GET':
-        flash('Register to continue.')
         return render_template('register.html', data=data)
 
     if request.method == 'POST':
@@ -88,7 +84,6 @@ def register():
 def logout():
     """Logout the logged user"""
     users.logout()
-    flash('Goodbye. You are now logged out!')
     return redirect(url_for('index'))
 
 
@@ -96,7 +91,6 @@ def logout():
 def display_bucket():
     """loop through the user's buckets and display the current buckets"""
     if users.user_is_logged_in is None:
-        flash('You are not logged in to view this page.')
         return redirect('/login')
 
     data = dict()
@@ -125,7 +119,7 @@ def add_bucket():
             bucketlists[current_user].append(new_bucket)
         else:
             bucketlists[current_user] = [new_bucket]
-        flash('A bucketlist "{}" has been added successfully'.format(bucket))
+        flash('Bucketlist has been added successfully')
         return redirect('/dashboard')
 
 
@@ -223,6 +217,8 @@ def edit_activity(activity_id):
 
         if logged_in_user in bucketlists.keys():
             user_bucket = bucketlists[logged_in_user]
+        for bucket in user_bucket:
+            bucket_id = str(bucket.id)
 
         for bucket in user_bucket:
             for item in bucket.bucket_activities:
@@ -230,7 +226,7 @@ def edit_activity(activity_id):
                     bucket.update_activity(_id, new_title)
                     break
         flash('Item edited successfully')
-        return redirect('/dashboard')
+        return redirect('/dashboard/' + bucket_id)
 
 
 @app.route('/manage/<bucket_id>/delete/<activity_id>', methods=['GET', 'POST'])
