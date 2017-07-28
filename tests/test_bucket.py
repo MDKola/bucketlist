@@ -6,7 +6,7 @@ from classes.buckets import Buckets
 class TestBucket(TestCase):
 
     def setUp(self):
-	"""Instantiate the Buckets class"""	
+        """Instantiate the Buckets class"""	
         self.bucket = Buckets("first bucket")
 
     def test_bucket_created(self):
@@ -15,11 +15,11 @@ class TestBucket(TestCase):
                         "The bucket title shoud be set")
 
     def test_bucket_id(self):
-		"""Test that each bucket is assigned an id"""
+        """Test that each bucket is assigned an id"""
         self.assertTrue(self.bucket.id != None, "set an id to each bucket")
 
     def test_update_bucket(self):
-		"""Test that a bucketlist is updated successfully"""
+        """Test that a bucketlist is updated successfully"""
         self.assertEqual(self.bucket.update_bucket(""),
                          "The new title cannot be empty.")
 
@@ -29,7 +29,7 @@ class TestBucket(TestCase):
                         "method update_bucket should update the title")
 
     def test_bucket_activity_create_activity(self):
-		"""Test that an activity is added successfully"""
+        """Test that an activity is added successfully"""
         acivity_id = self.bucket.create_activity("first one")
         self.assertTrue(self.bucket.bucket_activities == [{
             'id': acivity_id,
@@ -38,16 +38,12 @@ class TestBucket(TestCase):
         }], "an item should be created")
 
     def test_activity_title(self):
-		"""Test that the title of the activity is not an empty string"""
+        """Test that the title of the activity is not an empty string"""
         self.assertTrue(self.bucket.create_activity(""),
                         "The title cannot be empty")
 
     def test_bucket_update_activity(self):
-		"""Test that an activity is edited successfully"""
-        self.assertEqual(
-            self.bucket.update_activity("no_id", "new_activity_name"),
-            "The item does not exist")
-
+        """Test that an activity is edited successfully"""
         activity_id = self.bucket.create_activity("new activity")
         self.bucket.update_activity(activity_id, "newer ones")
         self.assertTrue(self.bucket.bucket_activities ==
@@ -58,7 +54,7 @@ class TestBucket(TestCase):
                         }], "The bucket_activities should be updated to 'newer ones'.")
 
     def test_delete_activity(self):
-		"""Test that an activity can be deleted successfully"""
+        """Test that an activity can be deleted successfully"""
         activity_id = self.bucket.create_activity("remove this")
         activities_in_bucket = len(self.bucket.bucket_activities)
         self.bucket.delete_activity(activity_id)
