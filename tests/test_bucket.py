@@ -6,7 +6,7 @@ from classes.buckets import Buckets
 class TestBucket(TestCase):
 
     def setUp(self):
-		"""Instantiate the Buckets class	
+	"""Instantiate the Buckets class"""	
         self.bucket = Buckets("first bucket")
 
     def test_bucket_created(self):
