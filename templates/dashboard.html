@@ -6,46 +6,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <base href="{{ data['host_url'] }}">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="../static/css/dashboard.css">
 
-      <style>
-  body{
-      background-image: url("../static/images/cover.jpg");
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-size:100 auto;
-   }
-   .navbar{
-    
-     border-radius: 0px;
-     border: none;
-     border-bottom: 1px solid black;
-     color: black;
-     margin-top: 10px;
-   }
-   .container{
-    background-image: url("../static/images/cover10.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    margin-top: 80px;
-    border-radius: 10px;
-   }
-   .title{
-    margin-top: 100px;
-   }
-   .other_nav{
-    margin-right: 82%;
-    background:rgba(0,0,0,0);
-    border-bottom: none;
-   }
-   .details a, .details{
-    color: black;
-   }
+  <style>
+      body{
+          background-image: url("../static/images/cover.jpg");
+          background-size: cover;
+          background-repeat: no-repeat;
+          background-size:100 auto;
+      }
+      .navbar{
+        
+        border-radius: 0px;
+        border: none;
+        border-bottom: 1px solid black;
+        color: black;
+        margin-top: 10px;
+      }
+      .container{
+        background-image: url("../static/images/cover10.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        margin-top: 80px;
+        border-radius: 10px;
+      }
+      .title{
+        margin-top: 100px;
+      }
+      .other_nav{
+        margin-right: 82%;
+        background:rgba(0,0,0,0);
+        border-bottom: none;
+      }
+      .details a, .details{
+        color: black;
+      }
   </style>
-
-  
 </head>
-
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
@@ -58,23 +54,26 @@
         </ul>
       </div>
     </nav>
-    <div>
-        {% with messages = get_flashed_messages() %}
-          {% if messages %}
-            <ul class=flashes>
-              {% for message in messages %}
-                <li>{{ message }}</li>
-              {% endfor %}
-            </ul>
-          {% endif %}
-        {% endwith %}
-    </div>
+
     <div class="col-md-2">
     </div>
+
     <div class="container col-md-8">  
       <hr>
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          {% for message in messages %}
+            <div class="alert alert-success alert-dismissable">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                {{ message }}
+            </div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
       <h3 class="text-center" >Your Current Buckets</h3>
       <hr>
+
         <form method="post">       
         <table class="table" id="bucketListTable">
           <thead>
@@ -95,7 +94,6 @@
               </td>
               <td>
               </td>
-              
               <td>
                  <a href="\edit\{{ bucketlist.id}}" class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span></a>
                   <a href="\dashboard\delete_bucket\{{ bucketlist.id}}" class="btn btn-default"><span class="glyphicon glyphicon-trash"></span></a>
@@ -105,8 +103,10 @@
           </tbody>
         </table>
         </form>
+
         <hr>
           <h4>Add a new bucketlist</h4>
+
          <form method="POST" action="/dashboard/add_bucket">
           <div class="form-group form-inline">
             <input type="text" class="form-control" required placeholder="Enter Bucket Name" id="title" name="bucket" value="{{ request.form.bucket }}">
@@ -115,7 +115,6 @@
          </form>
 
       
-  </div>
-  </script>
+     </div>
 </body>
 </html>
