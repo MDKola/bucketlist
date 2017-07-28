@@ -5,57 +5,64 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-      <style>
-  body{
-      background-image: url("../static/images/cover.jpg");
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-size:100 auto;
-   }
-   .navbar{
-    
-     border-radius: 0px;
-     border: none;
-     border-bottom: 1px solid black;
-     color: black;
-     margin-top: 10px;
-   }
-   .container{
-    background-image: url("../static/images/cover10.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    margin-top: 80px;
-    border-radius: 10px;
-   }
-   .title{
-    margin-top: 100px;
-   }
-   .other_nav{
-    margin-right: 82%;
-    background:rgba(0,0,0,0);
-    border-bottom: none;
-   }
-   .details a, .details{
-    color: black;
-   }
+  <style>
+      body{
+          background-image: url("../static/images/cover.jpg");
+          background-size: cover;
+          background-repeat: no-repeat;
+          background-size:100 auto;
+      }
+      .navbar{
+        
+        border-radius: 0px;
+        border: none;
+        border-bottom: 1px solid black;
+        color: black;
+        margin-top: 10px;
+      }
+      .container{
+        background-image: url("../static/images/cover10.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        margin-top: 80px;
+        border-radius: 10px;
+      }
+      .title{
+        margin-top: 100px;
+      }
+      .other_nav{
+        margin-right: 82%;
+        background:rgba(0,0,0,0);
+        border-bottom: none;
+      }
+      .details a, .details{
+        color: black;
+      }
   </style>
-
-  
 </head>
-
 <body>
+
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
-          <a class="navbar-brand" href="#">BucketList</a>
+          <a class="navbar-brand" href="/dashboard">BucketList</a>
         </div>
         <ul class="nav navbar-nav navbar-right">
-          <li class="active"><a href="#"><span class="glyphicon glyphicon-gear"></span> Buckets</a></li>
+          <li class="active"><a href="/dashboard"><span class="glyphicon glyphicon-gear"></span> Buckets</a></li>
           <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
         </ul>
       </div>
     </nav>
 
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          {% for message in messages %}
+            <div class="alert alert-dismissable">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                {{ message }}
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
     <div class="col-md-2">
     </div>
     <div class="container col-md-8">  
@@ -63,9 +70,10 @@
          <form name="addBucket" class="" method="POST", action="/edit_activity/{{activity_id}}">
           <div class="form-group">
             <input type="hidden" name="id" value="{{ activity_id}}">
-            <input type="text" class="form-control" required placeholder="Enter activity Name" id="title" name="new_title" value="{{ request.form.new_title }}">
+            <input type="text" class="form-control" required placeholder="Enter new activity Name" id="title" name="new_title" value="{{ request.form.new_title }}">
             <br>
-            <input type="submit" class="btn btn-primary" value="Add Bucket">
+            <input type="submit" class="btn btn-primary" value="Save Changes">
+            <a href="/dashboard" class="btn btn-default">Cancel</a>
           </div>
          </form>
 

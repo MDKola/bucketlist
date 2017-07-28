@@ -6,28 +6,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="../static/css/login.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
    <style>
-  body{
-       background-image: url("../static/images/cover.jpg");
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-size:100 auto;
-   }
-   .jumbotron{
-    background-image: url("../static/images/cover10.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-   }
-  </style>
-
+      body{
+          background-image: url("../static/images/cover.jpg");
+          background-size: cover;
+          background-repeat: no-repeat;
+          background-size:100 auto;
+      }
+      .jumbotron{
+        background-image: url("../static/images/cover10.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        margin: 10px;
+      }
+</style>
 </head>
 <body>
-<div class="col-md-3"></div>
-
+<div class="col-md-3">
+</div>
 <div class="container col-md-6">
 <div class="jumbotron">
+  <h5 class="alert alert-danger">{{data['error']}} </h5>
+  {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          {% for message in messages %}
+            <h5 class="alert alert-success alert-dismissable">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                {{ message }}
+            </h5>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
 <h3 class="text-center">Sign-Up</h3>
   <form method="POST" action="">
     <div class="input-group">
@@ -49,7 +58,6 @@
       <button type="submit" class="btn btn-primary col-md-12">Submit</button>
       <br>
       <hr>
-      <div class="text-danger">{{data['error']}} </div>
   </form>
       <h6 class="text">Already a member?<a href="/login"> Login</a></h6>
   </div>

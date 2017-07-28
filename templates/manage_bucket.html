@@ -1,109 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <base href="{{ data['host_url'] }}">
-        <title>The Bucketlist</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="dashboard.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<head>
+    <base href="{{ data['host_url'] }}">
+    <title>The Bucketlist</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="dashboard.css">
 
-        <style>
-            body{
-                background-image: url("../static/images/cover.jpg");
-                background-size: cover;
-                background-repeat: no-repeat;
-                background-position: center center fixed;
-      
-   }
-   .navbar{
-    border-radius: 0px;
-     border: none;
-     border-bottom: 1px solid black;
-     color: black;
-     margin-top: 10px;
-   }
-   .container{
-   background-image: url("../static/images/cover10.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    border-radius: 10px;
-   }
-   .title{
-    margin-top: 100px;
-   }
-   .other_nav{
-    margin-right: 82%;
-    background:rgba(0,0,0,0);
-    border-bottom: none;
-   }
-   .details a, .details{
-    color: black;
-   }
-   table th{
-     width: auto;
-   }
-
-  </style>
-  </style>
+<style>
+        body{
+            background-image: url("../static/images/cover.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center fixed;
+            }
+        .navbar{
+            border-radius: 0px;
+            border: none;
+            border-bottom: 1px solid black;
+            color: black;
+            margin-top: 10px;
+            }
+        .container{
+            background-image: url("../static/images/cover10.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            border-radius: 10px;
+            }
+        .title{
+            margin-top: 100px;
+            }
+        .other_nav{
+            margin-right: 82%;
+            background:rgba(0,0,0,0);
+            border-bottom: none;
+          }
+        .details a, .details{
+            color: black;
+          }
+        table th{
+            width: auto;
+          }
+    </style>
     </head>
     <body>
-
         <nav class="navbar navbar-inverse">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="#">BucketList</a>
-        </div>
-        <ul class="nav navbar-nav">
-          <li class="active"><a href="/dashboard">Home</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="/dashboard"><span class=""></span> Buckets</a></li>
-          <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-        </ul>
-      </div>
-    </nav>
-
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="#">BucketList</a>
+            </div>
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="/dashboard">Home</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/dashboard"><span class=""></span> Buckets</a></li>
+              <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+            </ul>
+          </div>
+        </nav>
         <div class="col-md-2">
-    </div>
+        </div>
         <div class="container col-md-8">
-        <hr>
-      <h3 class="text-center">Current Activities</h3>
-      <hr>
-        <form method="post">       
-        <table class="table" id="bucketListTable">
-          <thead>
-            <tr>
-              <th class="details">Activity</th>
-              <th class="details"></th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for activity in data['user_activities'] %}
-            {% if activity.title %}
-            <tr id="{{ activity.id }}">
-              <td class="details">
-                  {{ activity.title }}
-              </td>
-              <td>
-              </td>
-              
-              <td>
-                  <a href="\edit_activity\{{ activity.id }}" class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span></a>
-                  <a href="\manage\{{ data['current_bucket']}}\delete\{{activity.id}}" class="btn btn-default"><span class="glyphicon glyphicon-trash"></span></a>
-              </td>
-            </tr>
-            {% else %}
-            <p>Nothing to display here</p>
-            {% endif %}
-            {% endfor %}
-          </tbody>
-        </table>
-        </form>
-        <hr>
+          <br>
+          {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                {% for message in messages %}
+                  <div class="alert alert-success alert-dismissable">
+                  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                      {{ message }}
+                    </div>
+                {% endfor %}
+              {% endif %}
+          {% endwith %}
+          <h3 class="text-center">Current Activities</h3>
+          <hr>
+          <form method="post">       
+          <table class="table" id="bucketListTable">
+            <thead>
+              <tr>
+                <th class="details">Activity</th>
+                <th class="details"></th>
+                <th></th>
+              </tr>
+           </thead>
+            <tbody>
+              {% for activity in data['user_activities'] %}
+                {% if activity.title %}
+                  <tr id="{{ activity.id }}">
+                    <td class="details">
+                      {{ activity.title }}
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                      <a href="\edit_activity\{{ activity.id }}" class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span></a>
+                      <a href="\manage\{{ data['current_bucket']}}\delete\{{activity.id}}" class="btn btn-default"><span class="glyphicon glyphicon-trash"></span></a>
+                    </td>
+                  </tr>
+              {% else %}
+                <p>Nothing to display here</p>
+              {% endif %}
+              {% endfor %}
+             </tbody>
+            </table>
+            </form>
+              <hr>
             </form>
                 <form class="form-group" method="POST", action="manage/{{data['current_bucket']}}/add_activity">
               <div class="form-group form-inline">
